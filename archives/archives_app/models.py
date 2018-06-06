@@ -7,8 +7,8 @@ class Category(models.Model):
 	Model representing the category to which books and other sub-categories belong. (eg: AI, Algorithms etc.)
 	"""
 
-	name = models.CharField(max_length=200, help_text="Enter a category name")
-	path = models.CharField(max_length=256, help_text="Enter the path of file on local system.")
+	name = models.CharField(max_length=200, unique=True, help_text="Enter a category name")
+	path = models.CharField(max_length=256, unique=True, help_text="Enter the path of file on local system.")
 	subdirs = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
 
 	class Meta:
@@ -16,7 +16,7 @@ class Category(models.Model):
 
 	def __str__(self):
 		"""
-		String for representing the model object(in Admin site etc.)
+ 		String for representing the model object(in Admin site etc.)
 		"""
 		return self.name
 
@@ -24,8 +24,8 @@ class Book(models.Model):
 	"""
 	Model representing a book (but not a specific copy of a book).
 	"""
-	title = models.CharField(max_length=200)
-	path = models.CharField(max_length=256)
+	title = models.CharField(max_length=200, unique=True)
+	path = models.CharField(max_length=256, unique=True)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 	last_viewed = models.DateTimeField(null=True, blank=True)
 	STATUS = (
