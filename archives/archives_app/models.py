@@ -9,7 +9,7 @@ class Category(models.Model):
 
 	name = models.CharField(max_length=200, unique=True, help_text="Enter a category name")
 	path = models.CharField(max_length=256, unique=True, help_text="Enter the path of file on local system.")
-	subdirs = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
+	parent = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
 
 	class Meta:
 		verbose_name_plural = "categories"
